@@ -12,12 +12,17 @@ def twoSum(self, nums, target):
     :rtype: List[int]
     """
 
-    for i in nums:
-        if target - i in nums:
-            if target - i != i:
-                return [nums.index(target - i), nums.index(i)]
-            elif nums.count(i) == 2:
-                first_index = nums.index(i)
-                nums[nums.index(i)] = ''
-                second_index = nums.index(i)
-                return [first_index, second_index]
+    if not nums:
+        return None
+
+    d = {}
+    for i, item in enumerate(nums):
+        tmp = target - item
+
+        for key, value in d.items():
+            if value == tmp:
+                return [key, i]
+
+        d[i] = item
+
+    return None
